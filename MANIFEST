@@ -1,0 +1,16 @@
+Changes
+DllInject.pm
+DllInject.xs
+HookedFunctions/HookedFunctions.c
+HookedFunctions/Makefile
+HookedFunctions/Makefile.migw32.mak
+HookedFunctions/test_llu.c
+LICENSE
+MANIFEST
+Makefile.PL
+README
+ppport.h
+t/Win32-Monitoring-DllInject.t
+example.pl
+typemap
+META.yml                                 Module meta-data (added by MakeMaker)
