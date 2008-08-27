@@ -1,20 +1,20 @@
 /* *********************************************************************
- * Win32::Monitoring::DllInject - 
+ * Win32::Monitoring::DLLInject - 
  *    Injects Win32 programs with overloaded functions
  * *********************************************************************
- * DllInject.xs: Perl XS code for inject programs and DLLs
+ * DLLInject.xs: Perl XS code for inject programs and DLLs
  * *********************************************************************
  * Authors: Roman Plessl
  *          Tobias Oetiker
  *
  * Copyright (c) 2008 by OETIKER+PARTNER AG. All rights reserved.
  * 
- * Win32::Monitoring::DllInject is free software: you can redistribute 
+ * Win32::Monitoring::DLLInject is free software: you can redistribute 
  * it and/or modify it under the terms of the GNU General Public License 
  * as published by the Free Software Foundation, either version 3 of the 
  * License, or (at your option) any later version.
  *
- * $Id: DllInject.xs 130 2008-08-13 10:31:31Z rplessl $ 
+ * $Id: DLLInject.xs 156 2008-08-27 08:03:10Z rplessl $ 
  ***********************************************************************
  */
 
@@ -388,76 +388,76 @@ _StatMailSlot( HANDLE hSlot )
 #include "XSUB.h"
 #include "ppport.h"
 
-MODULE = Win32::Monitoring::DllInject           PACKAGE = Win32::Monitoring::DllInject
+MODULE = Win32::Monitoring::DLLInject           PACKAGE = Win32::Monitoring::DLLInject
 
 SV*
-init(DllInjectPid,szDllInjectLibFilePerlStr)
-    DWORD DllInjectPid; 
-    LPSTR szDllInjectLibFilePerlStr; 
+init(DLLInjectPid,szDLLInjectLibFilePerlStr)
+    DWORD DLLInjectPid; 
+    LPSTR szDLLInjectLibFilePerlStr; 
 PREINIT:
-    LPSTR DllInjectMailSlot;
-    LPWSTR szDllInjectLibFile; 
-    HANDLE hDllInjectMailSlot = NULL;
-    HMODULE hDllInjectModule = NULL;
+    LPSTR DLLInjectMailSlot;
+    LPWSTR szDLLInjectLibFile; 
+    HANDLE hDLLInjectMailSlot = NULL;
+    HMODULE hDLLInjectModule = NULL;
     int HookSucess = 0;
 PPCODE:
     // create mailslot 
-    DllInjectMailSlot = __MAILSLOT__;
-    hDllInjectMailSlot = _MakeMailSlot(DllInjectMailSlot);
+    DLLInjectMailSlot = __MAILSLOT__;
+    hDLLInjectMailSlot = _MakeMailSlot(DLLInjectMailSlot);
     // convert perl string to windows string
-    szDllInjectLibFile = _PerlStrToWinStr(szDllInjectLibFilePerlStr);
+    szDLLInjectLibFile = _PerlStrToWinStr(szDLLInjectLibFilePerlStr);
     // hook function
-    HookSucess = _DoHook(DllInjectPid, szDllInjectLibFile, FALSE, 0);
+    HookSucess = _DoHook(DLLInjectPid, szDLLInjectLibFile, FALSE, 0);
     if ( HookSucess == 1) {
-        hDllInjectModule = _EnumModules(DllInjectPid, szDllInjectLibFile);
+        hDLLInjectModule = _EnumModules(DLLInjectPid, szDLLInjectLibFile);
     }
     EXTEND(sp,3);
-    PUSHs( sv_2mortal( newSViv( PTR2IV(hDllInjectMailSlot) ) ) ); // it's just a ptr
-    PUSHs( sv_2mortal( newSViv( PTR2IV(hDllInjectModule) ) ) );   // it's just a ptr       
+    PUSHs( sv_2mortal( newSViv( PTR2IV(hDLLInjectMailSlot) ) ) ); // it's just a ptr
+    PUSHs( sv_2mortal( newSViv( PTR2IV(hDLLInjectModule) ) ) );   // it's just a ptr       
     PUSHs( sv_2mortal( newSViv( HookSucess ) ) );
 
 
 SV*
-destroy(DllInjectPid,szDllInjectLibFilePerlStr,hDllInjectMailSlot,hDllInjectModule)
-    DWORD DllInjectPid; 
-    LPSTR szDllInjectLibFilePerlStr; 
-    HANDLE hDllInjectMailSlot;
-    HMODULE hDllInjectModule;
+destroy(DLLInjectPid,szDLLInjectLibFilePerlStr,hDLLInjectMailSlot,hDLLInjectModule)
+    DWORD DLLInjectPid; 
+    LPSTR szDLLInjectLibFilePerlStr; 
+    HANDLE hDLLInjectMailSlot;
+    HMODULE hDLLInjectModule;
 PREINIT:
-    LPWSTR szDllInjectLibFile;   
+    LPWSTR szDLLInjectLibFile;   
     int UnHookSucess = 0;
 PPCODE:
     // convert perl string to windows string
-    szDllInjectLibFile = _PerlStrToWinStr(szDllInjectLibFilePerlStr);
+    szDLLInjectLibFile = _PerlStrToWinStr(szDLLInjectLibFilePerlStr);
     // unhook function
-    if(hDllInjectModule != NULL)
+    if(hDLLInjectModule != NULL)
     {
-        UnHookSucess = _DoHook(DllInjectPid, szDllInjectLibFile, TRUE, hDllInjectModule);
+        UnHookSucess = _DoHook(DLLInjectPid, szDLLInjectLibFile, TRUE, hDLLInjectModule);
     }
     if ( UnHookSucess == 1) {
-        hDllInjectModule = _EnumModules(DllInjectPid, szDllInjectLibFile);
+        hDLLInjectModule = _EnumModules(DLLInjectPid, szDLLInjectLibFile);
     }
     EXTEND(sp,2);
-    PUSHs( sv_2mortal( newSViv( PTR2IV(hDllInjectModule) ) ) );   // it's just a ptr
+    PUSHs( sv_2mortal( newSViv( PTR2IV(hDLLInjectModule) ) ) );   // it's just a ptr
     PUSHs( sv_2mortal( newSViv( UnHookSucess ) ) );               
     
 
 DWORD 
-StatMailslot(hDllInjectMailSlot)
-    HANDLE hDllInjectMailSlot;    
+StatMailslot(hDLLInjectMailSlot)
+    HANDLE hDLLInjectMailSlot;    
 CODE:
     RETVAL = 0;
-    if ( _ValidMailSlot( hDllInjectMailSlot ) )
+    if ( _ValidMailSlot( hDLLInjectMailSlot ) )
     {
-            RETVAL =  _StatMailSlot( hDllInjectMailSlot );
+            RETVAL =  _StatMailSlot( hDLLInjectMailSlot );
     }
 OUTPUT:
     RETVAL
 
 
 SV*
-GetMailslotMessage(hDllInjectMailSlot)
-    HANDLE hDllInjectMailSlot; 
+GetMailslotMessage(hDLLInjectMailSlot)
+    HANDLE hDLLInjectMailSlot; 
 PREINIT:
     DWORD  cbMessage =0;
     DWORD  cMessage =0;
@@ -480,7 +480,7 @@ PPCODE:
 
     // printf ("Begin Message Fetching!\n");
     
-    fResult = GetMailslotInfo( hDllInjectMailSlot, // mailslot handle
+    fResult = GetMailslotInfo( hDLLInjectMailSlot, // mailslot handle
                                (LPDWORD) NULL,     // no maximum message size
                                &cbMessage,         // size of next message 
                                &cMessage,          // number of messages
@@ -499,7 +499,7 @@ PPCODE:
         // Allocate memory for the message.
         lpszBuffer = (LPWSTR) GlobalAlloc(GPTR,cbMessage);
  
-        fResult = ReadFile(hDllInjectMailSlot,
+        fResult = ReadFile(hDLLInjectMailSlot,
                            lpszBuffer,
                            cbMessage, 
                            &cbRead,

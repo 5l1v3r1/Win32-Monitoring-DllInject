@@ -13,11 +13,11 @@ $OPTIMIZE =~ s/MD/MT/;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
 WriteMakefile(
-    NAME              => 'Win32::Monitoring::DllInject',
-    VERSION_FROM      => 'DllInject.pm', # finds $VERSION
+    NAME              => 'Win32::Monitoring::DLLInject',
+    VERSION_FROM      => 'DLLInject.pm', # finds $VERSION
     PREREQ_PM         => {}, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
-      (ABSTRACT_FROM  => 'DllInject.pm', # retrieve abstract from module
+      (ABSTRACT_FROM  => 'DLLInject.pm', # retrieve abstract from module
        AUTHOR         => 'Roman Plessl (rplessl at cpan dot org)'
     ) : ()),
     INC               => '-I.', # e.g., '-I. -I/usr/include/other',

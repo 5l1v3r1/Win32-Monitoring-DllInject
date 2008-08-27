@@ -4,7 +4,7 @@ use lib 'blib/lib';
 use lib 'blib/arch';
 
 use Win32::OLE;
-use Win32::Monitoring::DllInject;
+use Win32::Monitoring::DLLInject;
 use Data::Dumper;
 
 my $WshShell = Win32::OLE->new("WScript.Shell");
@@ -37,7 +37,7 @@ for my $line (`tasklist /v /nh`) {
   } 
 }
 
-my $P = Win32::Monitoring::DllInject->new($processes{'notepad.exe'},'Y:\\perl\\Win32-Monitoring-DllInject\\HookedFunctions.dll');
+my $P = Win32::Monitoring::DLLInject->new($processes{'notepad.exe'},'Y:\\perl\\Win32-Monitoring-DLLInject\\HookedFunctions.dll');
 
 print Dumper($P);
 

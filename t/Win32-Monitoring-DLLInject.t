@@ -1,12 +1,12 @@
 # Before `make install' is performed this script should be runnable with
-# `make test'. After `make install' it should work as `perl Win32-Monitoring-DllInject.t'
+# `make test'. After `make install' it should work as `perl Win32-Monitoring-DLLInject.t'
 
 #########################
 
 # change 'tests => 1' to 'tests => last_test_to_print';
 
 use Test::More tests => 1;
-BEGIN { use_ok('Win32::Monitoring::DllInject') };
+BEGIN { use_ok('Win32::Monitoring::DLLInject') };
 
 #########################
 

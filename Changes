@@ -1,9 +1,14 @@
-Revision history for Perl extension Win32::Monitoring::DllInject.
+Revision history for Perl extension Win32::Monitoring::DLLInject.
+
+Win32-Monitoring-DllInject-0.05, Mon 2008-08-27
+-----------------------------------------------
+- Renamded DllInject to DLLInject
+- Added README at HookedFunctions
 
 Win32-Monitoring-DllInject-0.04, Mon 2008-08-25
 -----------------------------------------------
 - Improve monitoring example and code of the injecting DLL
-- Fix correct handling of time stamps in DllInjector Example code
+- Fix correct handling of time stamps in DlInjector Example code
 - moved test.pl to example.pl 
 - added more documentation 
 

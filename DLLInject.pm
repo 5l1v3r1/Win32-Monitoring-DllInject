@@ -1,6 +1,6 @@
-# $Id: DllInject.pm 143 2008-08-25 13:26:35Z rplessl $
+# $Id: DLLInject.pm 157 2008-08-27 08:06:41Z rplessl $
 
-package Win32::Monitoring::DllInject;
+package Win32::Monitoring::DLLInject;
 
 use 5.008008;
 use strict;
@@ -17,7 +17,7 @@ our @ISA = qw(Exporter DynaLoader);
 # names by default without a very good reason. Use EXPORT_OK instead.
 # Do not simply export all your public functions/methods/constants.
 
-# This allows declaration	use Win32::Monitoring::DllInject ':all';
+# This allows declaration	use Win32::Monitoring::DLLInject ':all';
 # If you do not need this, moving things directly into @EXPORT or @EXPORT_OK
 # will save memory.
 our %EXPORT_TAGS = ( 'all' => [ qw(
@@ -31,9 +31,9 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 our @EXPORT = qw();
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
-bootstrap Win32::Monitoring::DllInject $VERSION;
+bootstrap Win32::Monitoring::DLLInject $VERSION;
 
 # Preloaded methods go here.
 
@@ -97,13 +97,13 @@ __END__
 
 =head1 NAME
 
-Win32::Monitoring::DllInject - Injects Win32 programs with overloaded functions
+Win32::Monitoring::DLLInject - Injects Win32 programs with overloaded functions
 
 =head1 SYNOPSIS
 
-  use Win32::Monitoring::DllInject qw(new UnHook StatMailslot GetMessage);
+  use Win32::Monitoring::DLLInject qw(new UnHook StatMailslot GetMessage);
 
-  my $handle = new Win32::Monitoring::DllInject($dll_path, $process_id);
+  my $handle = new Win32::Monitoring::DLLInject($dll_path, $process_id);
 
   while(1){
         sleep(1);
@@ -118,7 +118,7 @@ Win32::Monitoring::DllInject - Injects Win32 programs with overloaded functions
 
 =head1 DESCRIPTION
 
-The Win32::Monitoring::DllInject module provides a perl object to automatically
+The Win32::Monitoring::DLLInject module provides a perl object to automatically
 handles and injects a Windows program or a DLL with some overloading (self written)
 functional code.
 
@@ -133,7 +133,7 @@ application without requiring further modules.
 
 =item $handle = new($dll_path,$process_id)
 
-Returns an handle to the Win32::Monitoring::DllInject object to handle the
+Returns an handle to the Win32::Monitoring::DLLInject object to handle the
 overloaded (hooked) program.
 
 =item $handle->StatMailSlot()
@@ -155,7 +155,7 @@ Reverts the hooking of the program injecting.
   #! perl
 
   use Win32::OLE;
-  use Win32::Monitoring::DllInject;
+  use Win32::Monitoring::DLLInject;
   use Data::Dumper;
 
   my $WshShell = Win32::OLE->new("WScript.Shell");
@@ -180,7 +180,7 @@ Reverts the hooking of the program injecting.
       }
   }
 
-  my $P = Win32::Monitoring::DllInject->new($processes{'notepad.exe'},'Y:\\perl\\Win32-Monitoring-DllInject\\HookedFunctions.dll');
+  my $P = Win32::Monitoring::DLLInject->new($processes{'notepad.exe'},'Y:\\perl\\Win32-Monitoring-DLLInject\\HookedFunctions.dll');
 
   print Dumper($P);
 
@@ -203,12 +203,12 @@ Copyright (c) 2008 by OETIKER+PARTNER AG. All rights reserved.
 
 =head1 LICENSE
 
-Win32::Monitoring::DllInject is free software: you can redistribute
+Win32::Monitoring::DLLInject is free software: you can redistribute
 it and/or modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation, either version 3 of the
 License, or (at your option) any later version.
 
-Win32::Monitoring::DllInject is distributed in the hope that it will
+Win32::Monitoring::DLLInject is distributed in the hope that it will
 be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
 of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
