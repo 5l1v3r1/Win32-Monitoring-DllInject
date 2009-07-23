@@ -1,8 +1,8 @@
 /* *********************************************************************
  * Win32::Monitoring::DLLInject - 
- *    Injects Win32 programs with overloaded functions
+ *    Injects code into Win32 programs to overload functions
  * *********************************************************************
- * DLLInject.xs: Perl XS code for inject programs and DLLs
+ * DLLInject.xs: Perl XS code for injecting code into programs and DLLs
  * *********************************************************************
  * Authors: Roman Plessl
  *          Tobias Oetiker
@@ -14,7 +14,7 @@
  * as published by the Free Software Foundation, either version 3 of the 
  * License, or (at your option) any later version.
  *
- * $Id: DLLInject.xs 156 2008-08-27 08:03:10Z rplessl $ 
+ * $Id: DLLInject.xs 203 2009-07-23 09:09:58Z rplessl $ 
  ***********************************************************************
  */
 

@@ -1,6 +1,6 @@
 /* *********************************************************************
  * Win32::Monitoring::DllInject - 
- *    Injects Win32 programs with overloaded functions
+ *    Injects code into Win32 programs to overload functions
  * *********************************************************************
  * HookedFunctions.c: Template and example for injecting DLL
  * *********************************************************************

@@ -14,4 +14,3 @@ ppport.h
 t/Win32-Monitoring-DLLInject.t
 example.pl
 typemap
-META.yml                                 Module meta-data (added by MakeMaker)

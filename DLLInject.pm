@@ -1,4 +1,4 @@
-# $Id: DLLInject.pm 157 2008-08-27 08:06:41Z rplessl $
+# $Id: DLLInject.pm 203 2009-07-23 09:09:58Z rplessl $
 
 package Win32::Monitoring::DLLInject;
 
@@ -31,7 +31,7 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 our @EXPORT = qw();
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 bootstrap Win32::Monitoring::DLLInject $VERSION;
 
@@ -97,13 +97,13 @@ __END__
 
 =head1 NAME
 
-Win32::Monitoring::DLLInject - Injects Win32 programs with overloaded functions
+Win32::Monitoring::DLLInject - Injects code into Win32 programs to overload functions
 
 =head1 SYNOPSIS
 
   use Win32::Monitoring::DLLInject qw(new UnHook StatMailslot GetMessage);
 
-  my $handle = new Win32::Monitoring::DLLInject($dll_path, $process_id);
+  my $handle = new Win32::Monitoring::DLLInject($process_id, $dll_path);
 
   while(1){
         sleep(1);
@@ -118,27 +118,22 @@ Win32::Monitoring::DLLInject - Injects Win32 programs with overloaded functions
 
 =head1 DESCRIPTION
 
-The Win32::Monitoring::DLLInject module provides a perl object to automatically
-handles and injects a Windows program or a DLL with some overloading (self written)
-functional code.
+The Win32::Monitoring::DLLInject module provides a mechanism allowing a Perl program to inject (self written) code into a running Windows program or a DLL. This functionality can be used for patching or instrumenting code.
 
-Additional a communication infrastructure is set up using a Windows mailslot
-to return information like status information or time measurements to the callee.
+Additionally, a communication channel using a Windows mailslot is set up. This channel can be used for sending information, e.g. status information or time measurements, back to the Perl application that injected the code.
 
-As a bonus there is an example framework for a DLL implementation included, such
-that you can implement a nice time measuring monitoring program for any Win32
-application without requiring further modules.
+As a bonus, we provide an example for a DLL implementation that allows for adding time measuring to any Win32 application without requiring further modules.
 
 =over
 
 =item $handle = new($dll_path,$process_id)
 
-Returns an handle to the Win32::Monitoring::DLLInject object to handle the
+Returns an handle to the Win32::Monitoring::DLLInject object which represents the 
 overloaded (hooked) program.
 
 =item $handle->StatMailSlot()
 
-Returns the amount of messages in the internal message store (mailslot).
+Returns the number of messages in the internal message store (mailslot).
 
 =item $handle->GetMessage()
 
@@ -146,7 +141,7 @@ Returns the content of the first message in the message store.
 
 =item $handle->Unhook()
 
-Reverts the hooking of the program injecting.
+Removes the injected code from the program and restores the original function.
 
 =back
 
@@ -199,7 +194,7 @@ Webpage: <http://oss.oetiker.ch/optools/>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2008 by OETIKER+PARTNER AG. All rights reserved.
+Copyright (c) 2008, 2009 by OETIKER+PARTNER AG. All rights reserved.
 
 =head1 LICENSE
 

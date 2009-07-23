@@ -1,6 +1,6 @@
 # *********************************************************************
 # * Win32::Monitoring::DllInject - 
-# *    Injects Win32 programs with overloaded functions
+# *    Injects code into Win32 programs to overloaded functions
 # * *********************************************************************
 # * Makefile: Visual Studio nmake file for compiling example DLL
 # * *********************************************************************
@@ -14,7 +14,7 @@
 # * as published by the Free Software Foundation, either version 3 of the 
 # * License, or (at your option) any later version.
 # *
-# * $Id: Makefile 143 2008-08-25 13:26:35Z rplessl $ 
+# * $Id: Makefile 203 2009-07-23 09:09:58Z rplessl $ 
 # ***********************************************************************
 
 CC=cl
